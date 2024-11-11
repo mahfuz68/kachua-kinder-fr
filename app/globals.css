@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main_bg {
+  background: linear-gradient(115deg, rgb(211, 255, 215) 0%, rgb(0, 0, 0) 100%),
+    radial-gradient(
+      90% 100% at 50% 0%,
+      rgb(200, 200, 200) 0%,
+      rgb(22, 0, 45) 100%
+    ),
+    radial-gradient(
+      100% 100% at 50% 0%,
+      rgb(250, 255, 0) 0%,
+      rgb(36, 0, 0) 100%
+    ),
+    radial-gradient(
+      150% 213.32% at 100% 0%,
+      rgb(112, 255, 0) 0%,
+      rgb(20, 175, 125) 150%,
+      rgb(0, 10, 255) 100%
+    ),
+    radial-gradient(
+      100% 200% at 100% 0%,
+      rgb(255, 77, 0) 0%,
+      rgba(0, 200, 255, 1) 100%
+    ),
+    linear-gradient(60deg, rgb(255, 0, 0) 0%, rgb(120, 86, 255) 100%);
+  background-blend-mode: overlay, overlay, difference, difference, difference,
+    normal;
+}
+
+.font-hind {
+  font-family: var(--font-hind-siliguri);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #cac5c5;
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #636262;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 9px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Works for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
