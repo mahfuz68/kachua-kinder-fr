@@ -4,6 +4,9 @@
 import { Avatar, Checkbox, Table } from "flowbite-react";
 
 import { velidClass } from "@/lib/numberTranslate";
+import { useState } from "react";
+import { HiMiniPencilSquare } from "react-icons/hi2";
+import EditTstudentModal from "./editTStudentModal";
 
 export default function StudentTable({
   data,
@@ -12,7 +15,7 @@ export default function StudentTable({
   data: Array<any>;
   isPub: boolean;
 }) {
-  console.log(isPub);
+  const [openModalg, setOpenModalg] = useState("");
 
   const len = data.length > 0 ? data.length : false;
   const generateResult = (res: any, roll: any) => {
@@ -29,6 +32,13 @@ export default function StudentTable({
     }
     return result;
   };
+
+  const propx = {
+    openModalg,
+    setOpenModalg,
+    data: data,
+    isPub: isPub,
+  };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg min-h-[80vh] dark:bg-gray-800">
       <Table hoverable className="rounded-none hover:rounded-none">
@@ -43,6 +53,7 @@ export default function StudentTable({
           {isPub && <Table.HeadCell>রেজাল্ট</Table.HeadCell>}
           <Table.HeadCell>পিতার নাম</Table.HeadCell>
           <Table.HeadCell>মাতার নাম</Table.HeadCell>
+          <Table.HeadCell>Actions</Table.HeadCell>
         </Table.Head>
         {len &&
           data.map((user: any) => {
@@ -81,6 +92,18 @@ export default function StudentTable({
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap text-[16px] dark:text-white font-semibold">
                     {user?.student?.motherName}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <button
+                      onClick={() => setOpenModalg(user?.id)}
+                      className="flex gap-x-2 text-[15px] px-3 py-2 rounded-lg font-semibold bg-primary-700 hover:bg-primary-800 text-white"
+                    >
+                      <HiMiniPencilSquare className="w-5 h-5" />
+                      ইডিট
+                    </button>
+                    {openModalg == user?.id && (
+                      <EditTstudentModal prop={propx} />
+                    )}
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
