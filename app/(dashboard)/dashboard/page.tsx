@@ -14,6 +14,7 @@ export default function Page({}: Props) {
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [uData, setUdata] = useState<any>(undefined);
+  const [sData, setSData] = useState<any>([]);
   const [count, setCount] = useState(0);
   const isNextExist = count > page * 15;
   const user: any = session?.user;
@@ -44,6 +45,7 @@ export default function Page({}: Props) {
           setLoading(false);
           setError("");
           data && setUdata(data);
+          data && setSData(data?.profile?.ExamWiseSchool?.[0]?.ExamWiseStudent);
           data &&
             setCount(
               data?.profile?.ExamWiseSchool?.[0]?._count?.ExamWiseStudent
@@ -118,7 +120,7 @@ export default function Page({}: Props) {
             <TableLoading />
           </div>
         ) : (
-          <StudentTable data={allStudent} isPub={isPub} />
+          <StudentTable data={sData} setDatax={setSData} isPub={isPub} />
         )}
         <div className="md:sticky pb-20 md:pb-4 md:mb-0 md:bottom-0 md:right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
           <div className="flex items-center mb-4 sm:mb-0">

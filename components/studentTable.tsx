@@ -11,12 +11,13 @@ import EditTstudentModal from "./editTStudentModal";
 export default function StudentTable({
   data,
   isPub,
+  setDatax,
 }: {
   data: any;
   isPub: any;
+  setDatax: any;
 }) {
   const [openModalg, setOpenModalg] = useState("");
-  const [sData, setSData] = useState(data);
 
   const len = data.length > 0 ? data.length : false;
   const generateResult = (res: any, roll: any) => {
@@ -51,7 +52,7 @@ export default function StudentTable({
           <Table.HeadCell>Actions</Table.HeadCell>
         </Table.Head>
         {len &&
-          sData.map((user: any) => {
+          data.map((user: any) => {
             return (
               <Table.Body
                 key={Math.random() * 100}
@@ -102,8 +103,8 @@ export default function StudentTable({
                         prop={{
                           user: user,
 
-                          data: sData,
-                          setData: setSData,
+                          data: data,
+                          setData: setDatax,
                           isPub: isPub,
                           setOpenModalg: setOpenModalg,
                           openModalg: openModalg,
