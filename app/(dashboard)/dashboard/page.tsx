@@ -95,7 +95,7 @@ export default function Page({}: Props) {
         </nav>
         <div>
           {uData?.name !== undefined && (
-            <h1 className="px-3 text-md dark:bg-gray-800 font-medium text-gray-800 sm:text-lg dark:text-white">
+            <h1 className="px-3 text-md dark:bg-gray-800 font-medium text-gray-800 sm:text-lg dark:text-white hidden">
               {`প্রধান শিক্ষকের নামঃ ${uData?.name}`}
             </h1>
           )}
