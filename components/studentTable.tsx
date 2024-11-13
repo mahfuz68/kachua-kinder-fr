@@ -12,10 +12,11 @@ export default function StudentTable({
   data,
   isPub,
 }: {
-  data: Array<any>;
-  isPub: boolean;
+  data: any;
+  isPub: any;
 }) {
   const [openModalg, setOpenModalg] = useState("");
+  const [sData, setSData] = useState(data);
 
   const len = data.length > 0 ? data.length : false;
   const generateResult = (res: any, roll: any) => {
@@ -33,12 +34,6 @@ export default function StudentTable({
     return result;
   };
 
-  const propx = {
-    openModalg,
-    setOpenModalg,
-    data: data,
-    isPub: isPub,
-  };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg min-h-[80vh] dark:bg-gray-800">
       <Table hoverable className="rounded-none hover:rounded-none">
@@ -56,7 +51,7 @@ export default function StudentTable({
           <Table.HeadCell>Actions</Table.HeadCell>
         </Table.Head>
         {len &&
-          data.map((user: any) => {
+          sData.map((user: any) => {
             return (
               <Table.Body
                 key={Math.random() * 100}
@@ -101,8 +96,19 @@ export default function StudentTable({
                       <HiMiniPencilSquare className="w-5 h-5" />
                       ইডিট
                     </button>
+
                     {openModalg == user?.id && (
-                      <EditTstudentModal prop={propx} />
+                      <EditTstudentModal
+                        prop={{
+                          user: user,
+
+                          data: sData,
+                          setData: setSData,
+                          isPub: isPub,
+                          setOpenModalg: setOpenModalg,
+                          openModalg: openModalg,
+                        }}
+                      />
                     )}
                   </Table.Cell>
                 </Table.Row>

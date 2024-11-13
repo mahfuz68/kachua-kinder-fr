@@ -15,8 +15,6 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
   const inputFile = useRef<any>(null);
 
   const [name, setName] = useState(prop?.user?.student?.name);
-  const [classRoll, setClassRoll] = useState(prop?.user?.bnRoll);
-  const [cless, setClass] = useState(prop?.user?.student?.classN);
   const [fatherName, setFatherName] = useState(prop?.user?.student?.fatherName);
   const [motherName, setMotherName] = useState(prop?.user?.student?.motherName);
   const [avatarId, setAvatarId] = useState(prop?.user?.student?.avatar?.id);
@@ -103,7 +101,6 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
       let motherName_n: string = motherName ? motherName : "";
       const body = {
         name,
-        class: cless,
         fatherName,
         motherName: motherName_n,
         avatarId,
@@ -114,13 +111,13 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
         setLoading(true);
 
         const req = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/roll/supedit/${prop?.user?.id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/student/teacher/${prop?.user?.student?.id}`,
           {
             method: "PATCH",
             body: JSON.stringify(body),
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer " + user?.accessToken,
+              Authorization: "Bearer " + user.accessToken,
             },
           }
         );
@@ -130,19 +127,22 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
           setError(res.error);
           setLoading(false);
         } else {
-          prop?.data.setStudent([
+          console.log(res);
+          console.log(prop?.data);
+
+          prop?.setData([
             ...prop?.data.map((std: any) => {
-              if (std?.id !== res?.id) {
+              if (std?.id !== res?.ExamWiseStudent?.id) {
                 return std;
               } else {
-                return res;
+                return res?.ExamWiseStudent;
               }
             }),
           ]);
 
           clearInputFile();
 
-          prop.setOpenModal(undefined);
+          prop.setOpenModalg(undefined);
         }
       } catch (e: any) {
         setLoading(false);
@@ -160,7 +160,7 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
       tabIndex={-1}
       aria-hidden="false"
       className={`${
-        prop.openModalg === prop?.user?.id ? "block" : "hidden"
+        prop?.openModalg === prop?.user?.id ? "block" : "hidden"
       } overflow-y-auto overflow-x-hidden fixed flex z-50 justify-center items-center w-full inset-0 h-[81vh] md:h-full bg-opacity-50 dark:bg-opacity-80 bg-gray-900`}
     >
       <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -174,7 +174,7 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
             <button
               onClick={(e) => {
                 clearInputFile();
-                prop.setOpenModalg(undefined);
+                prop?.setOpenModalg(undefined);
               }}
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -198,7 +198,6 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
           </div>
           {/* Modal body */}
           <div>
-            {/* main body where edited */}
             <div className="space-y-6">
               <div className="p-6 space-y-6">
                 <div className="font-semibold text-[15px]">
@@ -223,8 +222,6 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
                         required
                       />
                     </div>
-                    <div className="col-span-6 sm:col-span-3"></div>
-                    <div className="col-span-6 sm:col-span-3"></div>
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="position"
@@ -267,7 +264,7 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
                           className="block mb-2 text-md font-semibold text-gray-900 dark:text-white"
                           htmlFor="default_size"
                         >
-                          ছবি পরিবর্তন করতে চাইলে আপলোড করুন
+                          ছবি পরিবর্তন করতে চাইলে আপলোড
                         </label>
 
                         <input
@@ -318,6 +315,8 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
                         )}
                       </>
                     </div>
+                    <div className="col-span-6 sm:col-span-3"></div>
+                    <div className="col-span-6 sm:col-span-3"></div>
                   </div>
                 </div>
               </div>
@@ -335,9 +334,8 @@ export default function EditTstudentModal({ prop }: { prop: any }) {
               <button
                 disabled={loading}
                 onClick={() => {
-                  if (name && fatherName && classRoll && cless && avatarId) {
+                  if (name && fatherName && avatarId) {
                     updateStudent(name, fatherName, motherName, avatarId);
-                    //   crateUser(name, mobile, schoolName, eiin, password);
                   } else {
                     setError("অবশ্যই সকল তথ্য পূরণ করতে হবে");
                   }
