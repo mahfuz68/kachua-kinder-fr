@@ -17,3 +17,12 @@ FROM
     Exam e
 ORDER BY 
     e."createdAt" DESC;
+
+
+
+
+
+DROP DATABASE pkkadb;
+
+CREATE DATABASE ckkadb;
+DROP DATABASE ckkadb;
