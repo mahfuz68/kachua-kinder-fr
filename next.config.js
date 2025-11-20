@@ -24,7 +24,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.kkabd.net",
+        hostname: "api.kkabd.org",
       },
       {
         protocol: "https",
