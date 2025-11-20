@@ -93,7 +93,7 @@ export default function StudentTable({
                     <button
                       disabled={false}
                       onClick={() => setOpenModalg(user?.id)}
-                      className="hidden gap-x-2 text-[15px] px-3 py-2 rounded-lg font-semibold bg-primary-700 hover:bg-primary-800 text-white"
+                      className="gap-x-2 text-[15px] px-3 py-2 rounded-lg font-semibold bg-primary-700 hover:bg-primary-800 text-white"
                     >
                       <HiMiniPencilSquare className="w-5 h-5" />
                       ইডিট
