@@ -91,7 +91,7 @@ export default function StudentTable({
                   </Table.Cell>
                   <Table.Cell>
                     <button
-                      disabled={false}
+                      disabled={true}
                       onClick={() => setOpenModalg(user?.id)}
                       className="gap-x-2 flex text-[15px] px-3 py-2 rounded-lg font-semibold bg-primary-700 hover:bg-primary-800 text-white"
                     >
