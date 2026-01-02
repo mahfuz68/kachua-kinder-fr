@@ -130,7 +130,7 @@ export default function Page({}: Props) {
               </div>
             ) : result?.roll ? (
               <div className="text-xl text-gray-800 px-2 font-medium">
-                <p>KACHUA KINDERGARTEN ASSOCIATION SCHOLARSHIP EXAM - 2025</p>
+                <p>KACHUA KINDERGARTEN ASSOCIATION SCHOLARSHIP - 2025</p>
                 <p>{`স্কুলের নামঃ ${result?.schoolName}`}</p>
                 <p>
                   রোলঃ{" "}
